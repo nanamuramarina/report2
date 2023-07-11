@@ -1,4 +1,12 @@
-<p>titlr:<span><%= @book.title %></span></p>
+
+<body>
+<p>title:<span><%= @book.title %></span></p>
 <p>body：<span><%= @book.body %></span></p>
 
-<% link_to "editind", edit_book_path(@book.id) %>
+<p>
+<%= link_to "Edit", edit_book_path(@book.id) %>
+|
+<%= link_to "Back", books_path(@book.id) %>
+</p>
+
+</body>
