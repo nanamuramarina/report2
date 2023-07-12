@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2023_07_10_010225) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "body"
-    t.string "anothor"
+    t.string "anothre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

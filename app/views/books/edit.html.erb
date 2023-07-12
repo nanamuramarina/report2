@@ -1,5 +1,21 @@
+  <% if flash[:notice] %>
+     <p id="notice">
+       <%= flash[:notice] %>
+     </p>
+   <% end %>
 
-<body>
+   <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+ <body>
 <h1>Editing Book</h1>
 <%= form_with model:@book do |f| %>
  <h4>Title</h4>
@@ -13,5 +29,5 @@
 <p>
  <%= link_to "Show", book_path(@book.id) %>
  |
- <%= link_to "Back", books_path(@book.id) %>
+ <%= link_to "Back", books_path %>
 </body>

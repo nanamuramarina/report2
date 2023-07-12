@@ -1,31 +1,21 @@
 class BooksController < ApplicationController
-  module ApplicationHelper
-  def full_title(page_title='WebCampBackendNew')
-    base_title="WebCampBackendNew"
-    if page_title.empty?
-      base_title
-     else
-      "#{ page_title } | #{ base_title}"
-     end
-    end
-   end
-
-
   def new
     @book = Book.new
   end
 
   def index
     @books = Book.all
-    @books = Book.all.order(created_at: :desc)
+    @book = Book.new
   end
 
   def create
     @book = Book.new(book_params)
     if @book.save
+      flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id)
     else
-      render :new
+      @books = Book.all
+      render :index
     end
   end
 
@@ -37,6 +27,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+
   end
 
   def destroy
@@ -46,10 +37,16 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    Book.update(book_params)
-    redirect_to book_path(book.id)
-  end
+     @book = Book.find(params[:id])
+
+    if @book.update(book_params)
+
+      flash[:notice] = "Book was successfully created."
+      redirect_to book_path(@book.id)
+    else
+      render :edit
+    end
+    end
 
   private
   def book_params

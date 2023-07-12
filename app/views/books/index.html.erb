@@ -13,19 +13,27 @@
     <tr>
       <td><%= book.title %></td>
       <td><%= book.body %></td>
-      <td>
-        <%= link_to "Show", book_path(book), class: "show_#{book.id}" %>
-        <%= link_to "Edit", edit_book_path(book), class: "edit_#{book.id}" %>
-        <%= link_to "Destroy", book_path(book), method: :delete, "data-confirm" => "Are you sure?" %>
-      </td>
+      <td><%= link_to "Show", book_path(book.id), class: "show_#{book.id}" %></td>
+      <td><%= link_to "Edit", edit_book_path(book.id), class: "edit_#{book.id}" %></td>
+      <td><%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
+<% if @book.errors.any? %>
+ <%= @book.errors.count %>error prohibited this book ftom being saved
+ <ul>
+  <% @book.errors.full_messages.each do |message| %>
+   <li><%= message %></li>
+  <% end %>
+ </ul>
+<% end %>
+
 <div class="new">
 <h2>New Book</h2>
-<%= form_with model: Book.new do |f| %>
+
+<%= form_with model: @book do |f| %>
   <h4>Title</h4>
   <%= f.text_field :title %>
 
