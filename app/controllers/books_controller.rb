@@ -1,8 +1,4 @@
 class BooksController < ApplicationController
-  def new
-    @book = Book.new
-  end
-
   def index
     @books = Book.all
     @book = Book.new
@@ -46,7 +42,7 @@ class BooksController < ApplicationController
     else
       render :edit
     end
-    end
+  end
 
   private
   def book_params
